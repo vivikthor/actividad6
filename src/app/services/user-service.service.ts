@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interface';
 
 @Injectable({
@@ -18,5 +18,7 @@ export class UserServiceService {
 
   insert() {}
   update() {}
-  delete() {}
+  delete(_id : string | undefined) : Promise<IUser[]>{
+    return firstValueFrom(this.http.delete<IUser[]>(`${this.baseURL}${_id}`))
+  }
 }
