@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -6,6 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { IUser } from '../../interfaces/iuser.interface';
+import { UserServiceService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-user-form',
@@ -15,8 +18,12 @@ import {
   styleUrl: './user-form.component.css',
 })
 export class UserFormComponent {
-   userForm: FormGroup;
+  userForm: FormGroup;
+  activatedRoute = inject(ActivatedRoute);
+  userService = inject(UserServiceService);
+
   tipo: string = 'Nuevo';
+  submitBtn: string = 'Enviar';
   ExpEmail = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,10}$/;
 
   constructor() {
@@ -58,6 +65,39 @@ export class UserFormComponent {
     } else {
       return null;
     }
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(async (params: any) => {
+      if (params.id) {
+        this.tipo = 'Actualizar';
+        this.submitBtn = 'Actualizar';
+
+        const user: IUser = await this.userService.getById(params.id);
+
+        this.userForm = new FormGroup(
+          {
+            first_name: new FormControl(user.first_name, [Validators.required]),
+            last_name: new FormControl(user.last_name, [Validators.required]),
+            email: new FormControl(user.email, [
+              Validators.required,
+              Validators.pattern(this.ExpEmail),
+            ]),
+            password: new FormControl(user.password, [
+              Validators.required,
+              Validators.minLength(5),
+            ]),
+            rep_password: new FormControl(user.password, [Validators.required]),
+            username: new FormControl(user.username, [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            image: new FormControl(user.image, [Validators.required]),
+          },
+          [this.checkPassword]
+        );
+      }
+    });
   }
 
   getFormData() {}
