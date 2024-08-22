@@ -23,7 +23,7 @@ export class UserServiceService {
 
   insert() {}
   update() {}
-  delete(_id : string | undefined) : Promise<IUser[]>{
-    return firstValueFrom(this.http.delete<IUser[]>(`${this.baseURL}${_id}`))
+  delete(_id : string | undefined) : Promise<IUser>{
+    return firstValueFrom(this.http.delete<IUser>(`${this.baseURL}${_id}`))
   }
 }

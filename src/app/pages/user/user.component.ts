@@ -3,11 +3,12 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { UserServiceService } from '../../services/user-service.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
+import { DeleteBtnComponent } from "../../components/delete-btn/delete-btn.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [NavbarComponent, RouterLink],
+  imports: [NavbarComponent, RouterLink, DeleteBtnComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })

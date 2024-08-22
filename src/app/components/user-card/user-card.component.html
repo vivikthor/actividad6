@@ -1,5 +1,5 @@
 <img [src]="myUser.image" [alt]="myUser.first_name + '' + myUser.last_name" />
 <p>{{ myUser.first_name }} {{ myUser.last_name }}</p>
-<button [routerLink]="['/user/',myUser._id]">Ver detalle</button>
-<button [routerLink]="['/update-user/',myUser._id]">Actualizar</button>
-<button (click)="deleteUser(myUser._id)">Eliminar</button>
+<button [routerLink]="['/user/', myUser._id]">Ver detalle</button>
+<button [routerLink]="['/update-user/', myUser._id]">Actualizar</button>
+<app-delete-btn [deleteThis]="myUser"/>
