@@ -1,0 +1,34 @@
+<main class="container">
+  <h1>{{ tipo }} usuario</h1>
+  <form [formGroup]="userForm">
+    <div class="form-group">
+      <label for="first_name" class="form-label">Nombre</label>
+      <input type="text" id="first_name" placeholder="Nombre" class="form-control" formControlName="first_name"/>
+    </div>
+    <div class="form-group">
+      <label for="last_name" class="form-label">Apellidos</label>
+      <input type="text" id="last_name" placeholder="Apellidos" class="form-control" formControlName="last_name"/>
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email"/>
+    </div>
+    
+    <div class="form-group">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="text" id="password" placeholder="Contraseña" class="form-control" formControlName="password"/>
+    </div>
+    <div class="form-group">
+        <label for="rep_password" class="form-label">Repite la contraseña</label>
+        <input type="text" id="rep_password" placeholder="Contraseña" class="form-control" formControlName="rep_password"/>
+    </div>
+    <div class="form-group">
+      <label for="username" class="form-label">Nombre de usuario</label>
+      <input type="text" id="username" placeholder="Nombre de usuario" class="form-control" formControlName="username"/>
+    </div>
+    <div class="form-group">
+        <label for="image" class="form-label">Imagen</label>
+        <input type="text" id="image" placeholder="https://..." class="form-control" formControlName="image"/>
+    </div>
+</form>
+</main>
