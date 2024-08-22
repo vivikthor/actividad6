@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { UserServiceService } from '../../services/user-service.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [UserCardComponent],
+  imports: [UserCardComponent, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
