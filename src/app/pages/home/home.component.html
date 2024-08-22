@@ -1,1 +1,6 @@
 <p>home works!</p>
+@for (user of USERS; track user._id) {
+    <app-user-card [myUser]="user"></app-user-card>
+}@empty {
+    <h1>No hay usuarios</h1>
+}

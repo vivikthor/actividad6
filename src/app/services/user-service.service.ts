@@ -1,9 +1,22 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { IUser } from '../interfaces/iuser.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserServiceService {
+  private baseURL: string = 'https://peticiones.online/api/users/';
+  private http = inject(HttpClient);
 
-  constructor() { }
+  getAll(page: number = 1): Promise<IUser[]> {
+    return firstValueFrom(
+      this.http.get<IUser[]>(`${this.baseURL}?page=${page}`)
+    );
+  }
+
+  insert() {}
+  update() {}
+  delete() {}
 }
