@@ -1,2 +1,18 @@
 <app-navbar></app-navbar>
-<p>user works!</p>
+<nav aria-label="breadcrumb">
+<button type="button" class="btn btn-link" [routerLink]="['/home']">Volver al listado</button>
+
+<main class="container row p-5">
+    <div class="col">
+        <img [src]="USER.image" [alt]="'Foto de perfil de '+ USER.username">
+    </div>
+    <div class="col">
+        <h1>{{USER.first_name}} {{USER.last_name}}</h1>
+        <p><strong>Nombre de usuario:</strong> {{USER.username}}</p>
+        <p><strong>Email:</strong> {{USER.email}}</p>
+
+        <div>
+            <button [routerLink]="['/update-user/',USER._id]">Actualizar</button>
+        </div>
+    </div>
+</main>

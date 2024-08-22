@@ -15,6 +15,11 @@ export class UserServiceService {
       this.http.get<IUser[]>(`${this.baseURL}?page=${page}`)
     );
   }
+  getById(_id: string): Promise<IUser> {
+    return firstValueFrom(
+      this.http.get<IUser>(`${this.baseURL}${_id}`)
+    );
+  }
 
   insert() {}
   update() {}
