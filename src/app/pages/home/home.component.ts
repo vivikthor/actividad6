@@ -14,11 +14,31 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 export class HomeComponent {
   userService = inject(UserServiceService);
   USERS: IUser[] = [];
+  PAGES : any[] = []
 
   ngOnInit() {
     this.userService
       .getAll()
-      .then((res: any) => {this.USERS = res.results})
-      .catch((error) => { console.log(error)});
+      .then((res: any) => {
+        this.USERS = res.results;
+
+        for(let i : number = 1; i <= res.total_pages; i++){
+          this.PAGES.push(i);
+        }
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  moveToPage(page:number){this.userService
+      .getAll(page)
+      .then((res: any) => {
+        this.USERS = res.results;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 }
