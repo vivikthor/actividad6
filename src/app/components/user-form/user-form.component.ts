@@ -10,8 +10,14 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class UserFormComponent {
   userForm: FormGroup;
-  tipo :string ="Nuevo"
+  tipo :string ="Nuevo";
+
   constructor() {
     this.userForm = new FormGroup({}, []);
+  }
+
+
+  getFormData(){
+    
   }
 }

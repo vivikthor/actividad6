@@ -1,6 +1,6 @@
 <main class="container">
   <h1>{{ tipo }} usuario</h1>
-  <form [formGroup]="userForm">
+  <form [formGroup]="userForm" (ngSubmit)="getFormData()" novalidate>
     <div class="form-group">
       <label for="first_name" class="form-label">Nombre</label>
       <input type="text" id="first_name" placeholder="Nombre" class="form-control" formControlName="first_name"/>
@@ -30,5 +30,7 @@
         <label for="image" class="form-label">Imagen</label>
         <input type="text" id="image" placeholder="https://..." class="form-control" formControlName="image"/>
     </div>
+
+    <input type="submit" value="Enviar" [disabled]="!userForm.valid">
 </form>
 </main>
