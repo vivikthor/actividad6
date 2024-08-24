@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserServiceService } from '../../services/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-form',
@@ -21,7 +22,7 @@ export class UserFormComponent {
   userForm: FormGroup;
   activatedRoute = inject(ActivatedRoute);
   userService = inject(UserServiceService);
-  router = inject(Router)
+  router = inject(Router);
 
   userInProgress!: string;
   tipo: string = 'Nuevo';
@@ -111,17 +112,36 @@ export class UserFormComponent {
           user._id,
           this.userForm.value
         );
-        if(res._id){
-          alert("usuario actualizado")
+        if (res._id) {
+          this.formSuccess();
         }
       } catch (error) {
         console.log(error);
       }
     } else {
       console.log('nuevo');
-      const res = await this.userService.insert(this.userForm.value)
-      console.log(res);
-      this.router.navigate(['/home'])
+      const res = await this.userService.insert(this.userForm.value);
+      if (res.id) {
+        console.log(res);
+        this.formSuccess();
+      }
     }
+  }
+
+  formSuccess() {
+    let timerInterval: any;
+    Swal.fire({
+      title: '¡Hecho!',
+      html: 'Redirigiendo a Inicio...',
+      timer: 3000,
+      timerProgressBar: false,
+      showCancelButton: false,
+      confirmButtonText: 'Vale',
+    }).then((result) => {
+      console.log(this.userForm.value);
+      if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+        this.router.navigate(['/home']);
+      }
+    });
   }
 }
