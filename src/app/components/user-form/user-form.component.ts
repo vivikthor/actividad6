@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserServiceService } from '../../services/user-service.service';
 
@@ -21,7 +21,9 @@ export class UserFormComponent {
   userForm: FormGroup;
   activatedRoute = inject(ActivatedRoute);
   userService = inject(UserServiceService);
+  router = inject(Router)
 
+  userInProgress!: string;
   tipo: string = 'Nuevo';
   submitBtn: string = 'Enviar';
   ExpEmail = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,10}$/;
@@ -73,8 +75,8 @@ export class UserFormComponent {
         this.tipo = 'Actualizar';
         this.submitBtn = 'Actualizar';
 
+        this.userInProgress = params.id;
         const user: IUser = await this.userService.getById(params.id);
-
         this.userForm = new FormGroup(
           {
             first_name: new FormControl(user.first_name, [Validators.required]),
@@ -100,5 +102,26 @@ export class UserFormComponent {
     });
   }
 
-  getFormData() {}
+  async getFormData() {
+    const user = await this.userService.getById(this.userInProgress);
+    if (user._id) {
+      console.log('existe');
+      try {
+        const res = await this.userService.update(
+          user._id,
+          this.userForm.value
+        );
+        if(res._id){
+          alert("usuario actualizado")
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log('nuevo');
+      const res = await this.userService.insert(this.userForm.value)
+      console.log(res);
+      this.router.navigate(['/home'])
+    }
+  }
 }

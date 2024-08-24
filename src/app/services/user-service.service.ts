@@ -16,14 +16,16 @@ export class UserServiceService {
     );
   }
   getById(_id: string): Promise<IUser> {
-    return firstValueFrom(
-      this.http.get<IUser>(`${this.baseURL}${_id}`)
-    );
+    return firstValueFrom(this.http.get<IUser>(`${this.baseURL}${_id}`));
   }
 
-  insert() {}
-  update() {}
-  delete(_id : string | undefined) : Promise<IUser>{
-    return firstValueFrom(this.http.delete<IUser>(`${this.baseURL}${_id}`))
+  insert(body: IUser) :Promise<IUser>{
+    return firstValueFrom(this.http.post<IUser>(`${this.baseURL}`,body))
+  }
+  update(_id: string, body: IUser): Promise<IUser> {
+    return firstValueFrom(this.http.put<IUser>(`${this.baseURL}${_id}`, body));
+  }
+  delete(_id: string | undefined): Promise<IUser> {
+    return firstValueFrom(this.http.delete<IUser>(`${this.baseURL}${_id}`));
   }
 }
