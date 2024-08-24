@@ -1,0 +1,4 @@
+.navbar {
+    background-color: rgb(245, 245, 245, 0.5);
+    backdrop-filter: blur(20px);
+}

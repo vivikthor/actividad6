@@ -1,5 +1,13 @@
-<img [src]="myUser.image" [alt]="myUser.first_name + '' + myUser.last_name" />
-<p>{{ myUser.first_name }} {{ myUser.last_name }}</p>
-<button [routerLink]="['/user/', myUser._id]">Ver detalle</button>
-<button [routerLink]="['/update-user/', myUser._id]">Actualizar</button>
-<app-delete-btn [deleteThis]="myUser"/>
+
+<span class="img-wrpr overflow-hidden d-flex justify-content-center">
+    <img [src]="myUser.image" [alt]="myUser.first_name + '' + myUser.last_name" class="img-responsive"/>
+</span>
+<p class="text-center">{{ myUser.first_name }} {{ myUser.last_name }}</p>
+
+<span class="d-flex gap-2">
+
+    <button class="btn btn-outline-info" [routerLink]="['/user/', myUser._id]"><i class="fa-regular fa-user"></i> Ver detalle</button>
+    <button class="btn btn-outline-secondary" [routerLink]="['/update-user/', myUser._id]"><i class="fa-regular fa-pen-to-square"></i> Actualizar</button>
+    <app-delete-btn [deleteThis]="myUser"/>
+    
+</span>
