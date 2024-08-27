@@ -1,20 +1,20 @@
 <app-navbar />
-<main class="container w-100">
-  <div class="row">
+<main class="container">
+  <div class="row gy-2 gx-2">
     @for (user of USERS; track user._id) {
-    <div
-      class="card gx-1 col col-sm-6 col-md-4 col-lg-3 overflow-hidden mb-5 p-3 text-center"
-    >
-      <app-user-card [myUser]="user"></app-user-card>
+    <div class="col col-sm-6 col-md-4 col-xl-3">
+      <div class="card overflow-hidden p-2 text-center h-100">
+        <app-user-card [myUser]="user" class="h-100 d-flex flex-column justify-content-between"></app-user-card>
+      </div>
     </div>
     }@empty {
     <h1>No hay usuarios</h1>
     }
   </div>
-  <div class="row">
+  <div class="row my-5">
     <div class="d-flex gap-2 justify-content-center">
       @for (page of PAGES; track $index) {
-      <button class="btn btn-outline-secondary" (click)="moveToPage(page)">
+      <button class="btn btn-outline-secondary fs-5" (click)="moveToPage(page)">
         {{ page }}
       </button>
       }

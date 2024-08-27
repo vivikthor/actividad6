@@ -24,8 +24,8 @@ export class DeleteBtnComponent {
         console.log(deleteRes);
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger',
+            confirmButton: 'btn btn-outline-success',
+            cancelButton: 'btn btn-outline-danger',
           },
           buttonsStyling: false,
         });
