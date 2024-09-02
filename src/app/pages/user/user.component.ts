@@ -5,11 +5,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { DeleteBtnComponent } from "../../components/delete-btn/delete-btn.component";
 import { UpdateBtnComponent } from '../../components/update-btn/update-btn.component';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [NavbarComponent, RouterLink, DeleteBtnComponent, UpdateBtnComponent],
+  imports: [NavbarComponent, RouterLink, DeleteBtnComponent, UpdateBtnComponent, FooterComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })

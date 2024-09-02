@@ -11,7 +11,9 @@
       </div>
     </div>
     }@empty {
-    <div class="container text-center h-100 d-flex flex-column align-items-center justify-content-center">
+    <div
+      class="container text-center h-100 d-flex flex-column align-items-center justify-content-center"
+    >
       <p class="fs-1">( •_•)</p>
       <h1 class="fs-5">No hay usuarios</h1>
     </div>
@@ -19,11 +21,16 @@
   </div>
   <div class="row my-5">
     <div class="d-flex gap-2 justify-content-center">
-      @for (page of PAGES; track $index) {
-      <button class="btn btn-outline-secondary fs-5" (click)="moveToPage(page)">
-        {{ page }}
-      </button>
-      }
+      <nav aria-label="Pages of users">
+        <ul class="pagination">
+          @for (page of PAGES; track $index) {
+          <li class="page-item">
+            <a class="page-link" (click)="moveToPage(page)">{{ page }}</a>
+          </li>
+          }
+        </ul>
+      </nav>
     </div>
   </div>
 </main>
+<app-footer></app-footer>

@@ -5,11 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserServiceService } from '../../services/user-service.service';
 import { UserInvalidComponent } from '../../components/user-invalid/user-invalid.component';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-update-user',
   standalone: true,
-  imports: [NavbarComponent, UserFormComponent, UserInvalidComponent],
+  imports: [NavbarComponent, UserFormComponent, UserInvalidComponent, FooterComponent],
   templateUrl: './update-user.component.html',
   styleUrl: './update-user.component.css',
 })
@@ -18,13 +19,6 @@ export class UpdateUserComponent {
   activatedRoute = inject(ActivatedRoute);
   activatedUser!: IUser;
 
-  // checkUser(user : IUser): boolean {
-  //   if(user === null){
-  //     return false
-  //   }else{
-  //     return true
-  //   }
-  // }
 
   ngOnInit() {
     console.log(this.activatedUser);

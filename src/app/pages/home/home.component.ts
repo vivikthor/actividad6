@@ -3,11 +3,12 @@ import { UserServiceService } from '../../services/user-service.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [UserCardComponent, NavbarComponent],
+  imports: [UserCardComponent, NavbarComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

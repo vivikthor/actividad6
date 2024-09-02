@@ -1,3 +1,12 @@
 .card {
     background-color: rgba(255, 255, 255, 0);
 }
+
+.page-link {
+    background: transparent;
+    color: gray;
+}
+
+.page-link:hover{
+    cursor: pointer;
+}
