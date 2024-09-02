@@ -26,6 +26,9 @@ export class UserFormComponent {
 
   userInProgress!: string;
   tipo: string = 'Nuevo';
+  img: string = '/assets/avatar-default.svg';
+  img_alt: string = 'Foto de perfil';
+  user_name: string = '';
   submitBtn: string = 'Enviar';
   ExpEmail = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,10}$/;
 
@@ -73,11 +76,14 @@ export class UserFormComponent {
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
       if (params.id) {
-        this.tipo = 'Actualizar';
+        this.tipo = 'Actualizar datos';
         this.submitBtn = 'Actualizar';
-
+        
         this.userInProgress = params.id;
         const user: IUser = await this.userService.getById(params.id);
+        this.img = user.image;
+        this.img_alt = user.first_name + " " + user.last_name;
+        this.user_name = user.first_name + " " + user.last_name;
         this.userForm = new FormGroup(
           {
             first_name: new FormControl(user.first_name, [Validators.required]),
@@ -130,18 +136,28 @@ export class UserFormComponent {
 
   formSuccess() {
     let timerInterval: any;
-    Swal.fire({
-      title: '¡Hecho!',
-      html: 'Redirigiendo a Inicio...',
-      timer: 3000,
-      timerProgressBar: false,
-      showCancelButton: false,
-      confirmButtonText: 'Vale',
-    }).then((result) => {
-      console.log(this.userForm.value);
-      if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
-        this.router.navigate(['/home']);
-      }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-outline-primary',
+        cancelButton: 'btn btn-outline-danger',
+      },
+      buttonsStyling: false,
     });
+    swalWithBootstrapButtons
+      .fire({
+        title: '¡Hecho!',
+        html: 'Redirigiendo a Inicio...',
+        timer: 3000,
+        timerProgressBar: false,
+        showCancelButton: false,
+        confirmButtonText: 'Vale',
+      })
+      .then((result) => {
+        console.log(this.userForm.value);
+        if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+          this.router.navigate(['/home']);
+        }
+      });
   }
 }

@@ -1,0 +1,14 @@
+.user-header {
+    flex-direction: column;
+}
+
+
+input.ng-invalid.ng-touched {
+    border-color: red;  
+}
+
+@media (min-width: 576px) {
+.user-header {
+    flex-direction: row;
+  }
+}
