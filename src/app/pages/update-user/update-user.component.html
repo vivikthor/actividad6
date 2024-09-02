@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
-<app-user-form></app-user-form>
+@if (activatedUser._id) {
+    <app-user-form></app-user-form>
+}@else {
+    <app-user-invalid></app-user-invalid>
+}
