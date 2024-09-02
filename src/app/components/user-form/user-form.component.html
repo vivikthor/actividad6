@@ -1,66 +1,150 @@
 <main class="container">
-  <h1>{{ tipo }} usuario</h1>
-   <form [formGroup]="userForm" (ngSubmit)="getFormData()" novalidate> 
-    <div class="form-group">
-      <label for="first_name" class="form-label">Nombre</label>
-      <input type="text" id="first_name" placeholder="Nombre" class="form-control" formControlName="first_name"/>
-       @if (checkValidation("first_name" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }
-    </div> 
-     <div class="form-group">
-      <label for="last_name" class="form-label">Apellidos</label>
-      <input type="text" id="last_name" placeholder="Apellidos" class="form-control" formControlName="last_name"/>
-       @if (checkValidation("last_name" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }
-    </div>
-    <div class="form-group">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"/>
-       @if (checkValidation("email" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }
-       @if (checkValidation("email" ,"pattern")) {
-            <p class="error"> El email no es correcto</p>
-        }
-    </div>
+  @if (tipo !== 'Nuevo') {
     
-    <div class="form-group">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" id="password" placeholder="Contraseña" class="form-control" formControlName="password"/>
-         @if (checkValidation("password" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }@if (checkValidation("password" ,"minlength")) {
-            <p class="error"> El campo debe tener al menos 5 caracteres</p>
-        }
-    </div>
-    <div class="form-group">
-        <label for="rep_password" class="form-label">Repite la contraseña</label>
-        <input type="password" id="rep_password" placeholder="Contraseña" class="form-control" formControlName="rep_password"/>
-         @if (checkValidation("rep_password" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }@if (userForm.hasError('checkpassword')) {
-            <p class="error">La contraseña no coincide</p>
-        }
-    </div>
-    <div class="form-group">
-      <label for="username" class="form-label">Nombre de usuario</label>
-      <input type="text" id="username" placeholder="Nombre de usuario" class="form-control" formControlName="username"/>
-       @if (checkValidation("username" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        } @if (checkValidation("username" ,"minlength")) {
-            <p class="error"> El campo es obligatorio</p>
-        }
-    </div>
-    <div class="form-group">
-        <label for="image" class="form-label">Imagen</label>
-        <input type="text" id="image" placeholder="https://..." class="form-control" formControlName="image"/>
-        @if (checkValidation("image" ,"required")) {
-            <p class="error"> El campo es obligatorio</p>
-        }
-    </div> 
+    <div class="user-header d-flex gap-3 align-items-center mb-3 border-bottom border-dark p-3">
+    <img
+      [src]="img"
+      [alt]="img_alt"
+      class="img-fit-cover rounded-circle"
+      height="100"
+    />
+    <span>
 
-    <input type="submit" [value]="submitBtn" [disabled]="!userForm.valid">
-</form>
+      <p
+      class=""
+      >
+      {{ tipo }}
+    </p>
+    <h1>{{ user_name }}</h1>
+  </span>
+  </div> }@else {
+  <h1
+    class="d-flex gap-4 align-items-center mb-3 border-bottom border-dark p-3"
+  >
+    <img
+      [src]="img"
+      [alt]="img_alt"
+      class="img-fit-cover rounded-circle"
+      height="50"
+    />
+
+    {{ tipo }} usuario
+  </h1>
+  }
+
+  <form [formGroup]="userForm" (ngSubmit)="getFormData()" novalidate>
+    <div class="form-group mb-3 row">
+      <span class="col">
+        <label for="first_name" class="form-label">Nombre</label>
+        <input
+          type="text"
+          id="first_name"
+          placeholder="Nombre"
+          class="form-control"
+          formControlName="first_name"
+        />
+        @if (checkValidation("first_name" ,"required")) {
+        <p class="text-danger">El campo es obligatorio</p>
+        }
+      </span>
+      <span class="col">
+        <label for="last_name" class="form-label">Apellidos</label>
+        <input
+          type="text"
+          id="last_name"
+          placeholder="Apellidos"
+          class="form-control"
+          formControlName="last_name"
+        />
+        @if (checkValidation("last_name" ,"required")) {
+        <p class="text-danger">El campo es obligatorio</p>
+        }
+      </span>
+    </div>
+    <div class="form-group mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        class="form-control"
+        formControlName="email"
+      />
+      @if (checkValidation("email" ,"required")) {
+      <p class="text-danger">El campo es obligatorio</p>
+      } @if (checkValidation("email" ,"pattern")) {
+      <p class="text-danger">El email no es correcto</p>
+      }
+    </div>
+
+    <div class="form-group mb-3 row">
+      <span class="col">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          class="form-control"
+          formControlName="password"
+        />
+        @if (checkValidation("password" ,"required")) {
+        <p class="text-danger">El campo es obligatorio</p>
+        }@if (checkValidation("password" ,"minlength")) {
+        <p class="text-danger">El campo debe tener al menos 5 caracteres</p>
+        }
+      </span>
+      <span class="col">
+        <label for="rep_password" class="form-label"
+          >Repite la contraseña</label
+        >
+        <input
+          type="password"
+          id="rep_password"
+          placeholder="Contraseña"
+          class="form-control"
+          formControlName="rep_password"
+        />
+        @if (checkValidation("rep_password" ,"required")) {
+        <p class="text-danger">El campo es obligatorio</p>
+        }@if (userForm.hasError('checkpassword')) {
+        <p class="text-danger">La contraseña no coincide</p>
+        }
+      </span>
+    </div>
+    <div class="form-group mb-3">
+      <label for="username" class="form-label">Nombre de usuario</label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Nombre de usuario"
+        class="form-control"
+        formControlName="username"
+      />
+      @if (checkValidation("username" ,"required")) {
+      <p class="text-danger">El campo es obligatorio</p>
+      } @if (checkValidation("username" ,"minlength")) {
+      <p class="text-danger">El campo es obligatorio</p>
+      }
+    </div>
+    <div class="form-group mb-3">
+      <label for="image" class="form-label">Imagen</label>
+      <input
+        type="text"
+        id="image"
+        placeholder="https://..."
+        class="form-control"
+        formControlName="image"
+      />
+      @if (checkValidation("image" ,"required")) {
+      <p class="text-danger">El campo es obligatorio</p>
+      }
+    </div>
+
+    <input
+      type="submit"
+      [value]="submitBtn"
+      [disabled]="!userForm.valid"
+      class="mt-2 btn btn-primary"
+    />
+  </form>
 </main>

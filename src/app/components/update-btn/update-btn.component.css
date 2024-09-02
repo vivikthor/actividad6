@@ -1,0 +1,11 @@
+button {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+@media (min-width: 576px) {
+button {
+    flex-direction: row;
+  }
+}

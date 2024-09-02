@@ -3,12 +3,18 @@
   <div class="row gy-2 gx-2">
     @for (user of USERS; track user._id) {
     <div class="col col-sm-6 col-md-4 col-xl-3">
-      <div class="card overflow-hidden p-2 text-center h-100">
-        <app-user-card [myUser]="user" class="h-100 d-flex flex-column justify-content-between"></app-user-card>
+      <div class="card overflow-hidden p-2 text-center h-100 border-dark">
+        <app-user-card
+          [myUser]="user"
+          class="h-100 d-flex flex-column justify-content-between"
+        ></app-user-card>
       </div>
     </div>
     }@empty {
-    <h1>No hay usuarios</h1>
+    <div class="container text-center h-100 d-flex flex-column align-items-center justify-content-center">
+      <p class="fs-1">( •_•)</p>
+      <h1 class="fs-5">No hay usuarios</h1>
+    </div>
     }
   </div>
   <div class="row my-5">
